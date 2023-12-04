@@ -1,0 +1,62 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\subsection*{Convergence of $\frac{F_{n-2}}{F_n}$}
+\begin{align*}
+    \frac{F_{n-2}}{F_n} &= \frac{F_{n-2}}{F_{n-2}+F_{n-1}}\\
+                        &= \left(\frac{F_{n-2}}{F_{n-2}}\right)\frac{1}{1+\frac{F_{n-1}}{F_{n-2}}}\\
+                        &= \frac{1}{1+\frac{F_{n-2}+F_{n-3}}{F_{n-2}}}\\
+                        &= \frac{1}{2+\frac{F_{n-3}}{F_{n-2}}}\\
+                        &= \frac{1}{2+\frac{1}{1+\frac{F_{n-4}}{F_{n-3}}}}\\
+                        &= \ldots
+\end{align*}
+
+Clearly there is a continued fraction of the form
+
+\begin{equation*}
+    \frac{F_{n-(k+1)}}{F_{n-k}} = \frac{1}{1+\frac{F_{n-(k+2)}}{F_{n-(k+1)}}}
+\end{equation*}
+
+which expands to
+
+\begin{equation*}
+    \frac{1}{1+\frac{1}{1+\ldots}}
+\end{equation*}
+
+(TODO) which converges to $1-\phi$.
+
+For a large enough $n$
+
+\begin{align*}
+    \frac{1}{2+\frac{F_{n-3}}{F_{n-2}}} &= \frac{1}{2+(\phi-1)}\\
+                                        &= \frac{1}{1+\phi}
+\end{align*}
+
+\newpage
+
+\subsection*{Given $n=F_i$, estimate $i$}
+
+Given the above convergence, $F_n$ can be computed from $F_{n-2}$:
+
+\begin{align*}
+    \frac{F_{n-2}}{F_n} &= \frac{1}{1+\phi}\\
+    F_n &= \left(1+\phi\right)F_{n-2}
+\end{align*}
+
+Therefore, starting from $F_1$ any $F_{2k+1}$ can be reached\footnote{Requires $k>40$, give or take.} 
+by performing $(1+\phi)^{k}F_1$, $k\geq 0$.
+
+So to find the number of steps from some $n=F_{2k+1}$ to $F_1$, solve for $k$:
+
+\begin{align*}
+    n\left(\frac{1}{1+\phi}\right)^k &= 1\\
+    k &= \frac{\log\left(\frac{1}{n}\right)}{\log\left(\frac{1}{1+\phi}\right)}
+\end{align*}
+
+To get the actual index perform $2*f(n)$ as $f(n)$ skips half the indices.
+
+TODO: Verify indices are correct, assuming $F_1 = 1, F_2=1$.
+
+\end{document}
